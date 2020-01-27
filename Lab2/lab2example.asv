@@ -1,0 +1,5 @@
+clc
+close all
+clear all
+
+x0 = [10; 10; 10];
