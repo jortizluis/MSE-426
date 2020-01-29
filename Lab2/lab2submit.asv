@@ -18,12 +18,45 @@ for i = 0: 1: 5
 end
 
 %% Problem 3
-A = [];
-b = [1; -4.25];
 for i = 0: 1: 5
    x0_p3 = [i; i]; 
-   [x0_p3, fval_p3, exitflag_p3, output_p3] = fmincon();
+   [x0_p3, fval_p3, exitflag_p3, output_p3] = fmincon(@fun3, x0_p3, [], [], [], [], [], [], @nlcon3)
 end
 
+%% Problem 4
+for i = 0: 1 :5
+   x0_p4 = [i; i];
+   [x0_p4, fval_p4, exitflag_p4, output_p4] = fmincon(@fun4, x0_p4, [], [], [], [], [], [], @nlcon4)
+end
 
+%% Problem 5
+for i = 0: 1: 5
+    A_p5 = [1, 1, 0, 0, 0, 0;
+            1, 1, 0, 0, 0, 0;
+            1, -3, 0, 0, 0, 0;
+            ];
+    b_p5 = [-2; 6; 2];
+    % There are no equalities, only inequalities
+    Aeq_p5 = [];
+    beq_p5 = [];
+    lb_p5 = [0, 0, 1, 0, 1, 0];
+    ub_p5 = [inf, inf, 5, 6, 5, 10];
+    
+    x0_p5 = [i; i; i; i; i; i];
+   [x0_p5, fval_p5, exitflag_p5, output_p5] = fmincon(@fun5, x0_p5, A_p5, b_p5, Aeq_p5, beq_p5, lb_p5, ub_p5, @nlcon5)
+    
+end
 
+%% Question 3
+
+% optimoptions for fmincon
+opt_tol_vals = [1e-6, ];
+for i = 1: 1: 5
+    options = optimoptions('fmincon', 'OptimalityTolerance', opt_tol_vals(i));
+end
+
+% optimoptions for optimalitytolerance
+
+% optimoptions for maxfunctionevaluations
+
+% optimoptions for hessianapproximation

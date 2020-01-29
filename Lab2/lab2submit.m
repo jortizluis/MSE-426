@@ -47,3 +47,18 @@ for i = 0: 1: 5
     
 end
 
+%% Question 3
+
+% optimoptions for fmincon
+opt_tol_vals = [1e-6, 10, 1, 1e-3, 1e-9];
+for i = 1: 1: 5
+    options = optimoptions('fmincon', 'OptimalityTolerance', opt_tol_vals(i));
+    x0_q3a = [0; 0];
+    [x_q3a, fval_q3a, exitflag_q3a, output_q3a] = fmincon(@fun3, x0_q3a, [], [], [], [], [], [], @nlcon3, options)
+end
+
+% optimoptions for optimalitytolerance
+
+% optimoptions for maxfunctionevaluations
+
+% optimoptions for hessianapproximation
