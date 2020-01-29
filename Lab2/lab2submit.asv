@@ -7,9 +7,23 @@ clear all
 % For example, A = []; b = [];
 
 for i = 0: 1: 5
-   x1 = [i; i];
-   [x1, fval_p1, exitflag_p1, output_p1] = fmincon(@fun1, x1)
-
+   x0_p1 = [i; i];
+   [x0_p1, fval_p1, exitflag_p1, output_p1] = fminunc(@fun1, x0_p1)
 end
 
 %% Problem 2
+for i = 0: 1: 5
+   x0_p2 = [i; i; i; i];
+   [x0_p2, fval_p2, exitflag_p2, output_p2] = fminunc(@fun2, x0_p2)
+end
+
+%% Problem 3
+A = [];
+b = [1; -4.25];
+for i = 0: 1: 5
+   x0_p3 = [i; i]; 
+   [x0_p3, fval_p3, exitflag_p3, output_p3] = fmincon();
+end
+
+
+
