@@ -23,7 +23,7 @@ for i = 0: 1: 5
    [x0_p3, fval_p3, exitflag_p3, output_p3] = fmincon(@fun3, x0_p3, [], [], [], [], [], [], @nlcon3)
 end
 
-%% Problem 4
+% %% Problem 4
 for i = 0: 1 :5
    x0_p4 = [i; i];
    [x0_p4, fval_p4, exitflag_p4, output_p4] = fmincon(@fun4, x0_p4, [], [], [], [], [], [], @nlcon4)
@@ -31,7 +31,7 @@ end
 
 %% Problem 5
 for i = 0: 1: 5
-    A_p5 = [1, 1, 0, 0, 0, 0;
+    A_p5 = [-1, -1, 0, 0, 0, 0;
             1, 1, 0, 0, 0, 0;
             1, -3, 0, 0, 0, 0;
             ];
@@ -49,16 +49,36 @@ end
 
 %% Question 3
 
-% optimoptions for fmincon
-opt_tol_vals = [1e-6, 10, 1, 1e-3, 1e-9];
-for i = 1: 1: 5
-    options = optimoptions('fmincon', 'OptimalityTolerance', opt_tol_vals(i));
-    x0_q3a = [0; 0];
-    [x_q3a, fval_q3a, exitflag_q3a, output_q3a] = fmincon(@fun3, x0_q3a, [], [], [], [], [], [], @nlcon3, options)
-end
-
 % optimoptions for optimalitytolerance
+% opt_tol_vals = [10, 1, 1e-6, 1e-3, 1e-9];
+% for i = 1: 1: 5
+%     options_a = optimoptions('fmincon', 'OptimalityTolerance', opt_tol_vals(i));
+%     x0_q3a = [i; i];
+%     [x_q3a, fval_q3a, exitflag_q3a, output_q3a] = fmincon(@fun3, x0_q3a, [], [], [], [], [], [], @nlcon3, options_a)
+% end
 
 % optimoptions for maxfunctionevaluations
+max_func_eval_vals = [5000, 100, 50, 30, 20];
+for i = 1: 1: 5
+   options_b = optimoptions('fmincon', 'MaxFunctionEvaluations', max_func_eval_vals(i));
+   x0_q3b = [i; i];
+   [x_q3b, fval_q3b, exitflag_q3b, output_q3b] = fmincon(@fun3, x0_q3b, [], [], [], [], [], [], @nlcon3, options_b)
+end
+
+% optimoptions for specifyobjectiveconstraint
+
+% initially false, set to true
+spec_obj_constr = true;
+for i = 1: 1: 5
+   options_c = optimoptions('fmincon', 'SpecifyObjectiveGradient', spec_obj_constr);
+   x0_q3c = [i; i];
+   [x_q3c, fval_q3c, exitflag_q3c, output_q3c] = fmincon(@q3fun3, x0_q3c, [],[],[],[],[],[], @nlcon3, options_c)
+end
 
 % optimoptions for hessianapproximation
+% hess_approx_val = 'lbfgs';
+% for i = 1: 1: 5
+%    options_d = optimoptions('fmincon', 'HessianApproximation', hess_approx_val);
+%    x0_q3d = [i; i];
+%    [x_q3d, fval_q3d, exitflag_q3d, output_q3d] = fmincon(@fun3, x0_q3d, [],[],[],[],[],[], @nlcon3, options_d)
+% end
