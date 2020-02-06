@@ -74,6 +74,8 @@ for i = 1: 1: 5
    x0_q3c = [i; i];
    [x_q3c, fval_q3c, exitflag_q3c, output_q3c] = fmincon(@q3fun3, x0_q3c, [],[],[],[],[],[], @nlcon3, options_c)
 end
+x_test = [200,400];
+[x_part8,fval_part8,exitflag_part8,output_part8] = fmincon(@q3fun3,x_test,[],[],[],[],[],[],@nlcon3,options_c)
 
 % optimoptions for hessianapproximation
 % hess_approx_val = 'lbfgs';
