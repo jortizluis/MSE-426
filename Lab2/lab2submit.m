@@ -30,50 +30,50 @@ clear all
 % end
 
 %% Problem 5
-for i = 0: 1: 5
-    A_p5 = [-1, -1, 0, 0, 0, 0;
-            1, 1, 0, 0, 0, 0;
-            1, -3, 0, 0, 0, 0;
-            ];
-    b_p5 = [-2; 6; 2];
-    % There are no equalities, only inequalities
-    Aeq_p5 = [];
-    beq_p5 = [];
-    lb_p5 = [0, 0, 1, 0, 1, 0];
-    ub_p5 = [inf, inf, 5, 6, 5, 10];
-    
-    x0_p5 = [i; i; i; i; i; i];
-   [x0_p5, fval_p5, exitflag_p5, output_p5] = fmincon(@fun5, x0_p5, A_p5, b_p5, Aeq_p5, beq_p5, lb_p5, ub_p5, @nlcon5)
-    
-end
+% for i = 0: 1: 5
+%     A_p5 = [-1, -1, 0, 0, 0, 0;
+%             1, 1, 0, 0, 0, 0;
+%             1, -3, 0, 0, 0, 0;
+%             ];
+%     b_p5 = [-2; 6; 2];
+%     % There are no equalities, only inequalities
+%     Aeq_p5 = [];
+%     beq_p5 = [];
+%     lb_p5 = [0, 0, 1, 0, 1, 0];
+%     ub_p5 = [inf, inf, 5, 6, 5, 10];
+%     
+%     x0_p5 = [i; i; i; i; i; i];
+%    [x0_p5, fval_p5, exitflag_p5, output_p5] = fmincon(@fun5, x0_p5, A_p5, b_p5, Aeq_p5, beq_p5, lb_p5, ub_p5, @nlcon5)
+%     
+% end
 
-% %% Question 3
-% 
-% % optimoptions for optimalitytolerance
-% % opt_tol_vals = [10, 1, 1e-6, 1e-3, 1e-9];
-% % for i = 1: 1: 5
-% %     options_a = optimoptions('fmincon', 'OptimalityTolerance', opt_tol_vals(i));
-% %     x0_q3a = [i; i];
-% %     [x_q3a, fval_q3a, exitflag_q3a, output_q3a] = fmincon(@fun3, x0_q3a, [], [], [], [], [], [], @nlcon3, options_a)
-% % end
-% 
+%% Question 3
+
+% %optimoptions for optimalitytolerance
+% opt_tol_vals = [10, 1, 1e-6, 1e-3, 1e-9];
+% for i = 1: 1: 5
+%     options_a = optimoptions('fmincon', 'OptimalityTolerance', opt_tol_vals(i));
+%     x0_q3a = [i; i];
+%     [x_q3a, fval_q3a, exitflag_q3a, output_q3a] = fmincon(@fun3, x0_q3a, [], [], [], [], [], [], @nlcon3, options_a)
+% end
+
 % % optimoptions for maxfunctionevaluations
-% max_func_eval_vals = [5000, 100, 50, 30, 20];
+% max_func_eval_vals = [3000, 100, 50, 30, 20];
 % for i = 1: 1: 5
 %    options_b = optimoptions('fmincon', 'MaxFunctionEvaluations', max_func_eval_vals(i));
 %    x0_q3b = [i; i];
 %    [x_q3b, fval_q3b, exitflag_q3b, output_q3b] = fmincon(@fun3, x0_q3b, [], [], [], [], [], [], @nlcon3, options_b)
 % end
 % 
-% % optimoptions for specifyobjectiveconstraint
-% 
-% % initially false, set to true
-% spec_obj_constr = true;
-% for i = 1: 1: 5
-%    options_c = optimoptions('fmincon', 'SpecifyObjectiveGradient', spec_obj_constr);
-%    x0_q3c = [i; i];
-%    [x_q3c, fval_q3c, exitflag_q3c, output_q3c] = fmincon(@q3fun3, x0_q3c, [],[],[],[],[],[], @nlcon3, options_c)
-% end
+% optimoptions for specifyobjectiveconstraint
+
+% initially false, set to true
+spec_obj_constr = true;
+for i = 1: 1: 5
+   options_c = optimoptions('fmincon', 'SpecifyObjectiveGradient', spec_obj_constr);
+   x0_q3c = [i; i];
+   [x_q3c, fval_q3c, exitflag_q3c, output_q3c] = fmincon(@q3fun3, x0_q3c, [],[],[],[],[],[], @nlcon3, options_c)
+end
 
 % optimoptions for hessianapproximation
 % hess_approx_val = 'lbfgs';
